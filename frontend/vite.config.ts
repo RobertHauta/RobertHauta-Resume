@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  base: process.env.NODE_ENV === 'production' ? '/RobertHauta-Resume/' : '/',
   server: {
     port: 80,
     host: '0.0.0.0',

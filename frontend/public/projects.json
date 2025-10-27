@@ -1,0 +1,33 @@
+[
+  {
+    "id": "1",
+    "title": "Portfolio Website",
+    "brief_description": "A modern portfolio website built with React, FastAPI, and MongoDB. Features a dynamic project gallery with detailed modal views.",
+    "full_description": "This portfolio website showcases my projects and skills in a clean, modern interface. Built with React 19 and TypeScript on the frontend, it features a responsive design using Mantine UI components. The project gallery allows visitors to browse through my work with smooth animations and detailed project information displayed in modal dialogs. The site is optimized for performance and includes a dark theme with custom red accent colors.",
+    "technologies": [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Mantine UI",
+      "FastAPI",
+      "MongoDB",
+      "Docker"
+    ],
+    "technology_icons": [
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+      "https://vitejs.dev/logo.svg",
+      "https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/mantine-logo.svg",
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg",
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
+    ],
+    "images": [
+      "https://placehold.co/800x400/1A1B1E/f21616?text=Portfolio+Screenshot+1",
+      "https://placehold.co/800x400/1A1B1E/f21616?text=Portfolio+Screenshot+2"
+    ],
+    "learned": "Through building this portfolio, I gained deep experience with modern React patterns including hooks and context API, TypeScript for type safety, and deploying full-stack applications with Docker. I also learned to create smooth user experiences with Mantine UI components and implement responsive designs that work across all devices.",
+    "github_url": "https://github.com/RobertHauta/RobertHauta-Resume",
+    "live_url": "https://roberthauta.github.io/RobertHauta-Resume/"
+  }
+]

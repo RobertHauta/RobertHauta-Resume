@@ -3,9 +3,6 @@ import { Container, Title, Text, Grid, Center, Loader, Stack } from '@mantine/co
 import { ProjectCard } from '../components/ProjectCard';
 import { ProjectModal } from '../components/ProjectModal';
 import type { Project } from '../types/project';
-import axios from 'axios';
-
-const API_URL = import.meta.env.VITE_API_URL || '/api/v1';
 
 export function Landing() {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -19,8 +16,9 @@ export function Landing() {
 
   const fetchProjects = async () => {
     try {
-      const response = await axios.get<Project[]>(`${API_URL}/projects`);
-      setProjects(response.data);
+      const response = await fetch('/projects.json');
+      const data = await response.json();
+      setProjects(data);
     } catch (error) {
       console.error('Failed to fetch projects:', error);
     } finally {
