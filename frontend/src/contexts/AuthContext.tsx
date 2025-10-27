@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import type { ReactNode } from 'react';
 import type { User, AuthContextType } from '../types/auth';
 import { apiClient } from '../services/api';
 import { notifications } from '@mantine/notifications';

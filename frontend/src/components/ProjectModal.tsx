@@ -21,7 +21,6 @@ export function ProjectModal({ project, opened, onClose }: ProjectModalProps) {
       padding="lg"
       centered
       overlayProps={{ blur: 3, opacity: 0.5 }}
-      scrollAreaComponent="div"
       styles={{
         content: {
           maxHeight: '90vh',
@@ -35,7 +34,7 @@ export function ProjectModal({ project, opened, onClose }: ProjectModalProps) {
       <Stack gap="lg">
         {/* Image Gallery */}
         {project.images.length > 0 && (
-          <Carousel withIndicators height={400} loop>
+          <Carousel withIndicators height={400}>
             {project.images.map((image, index) => (
               <Carousel.Slide key={index}>
                 <Image
