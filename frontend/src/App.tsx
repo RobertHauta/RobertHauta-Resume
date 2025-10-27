@@ -46,7 +46,7 @@ function App() {
   return (
     <MantineProvider theme={theme} defaultColorScheme="dark">
       <Notifications />
-      <Router>
+      <Router basename={import.meta.env.BASE_URL}>
         <Routes>
           <Route path="/" element={<Landing />} />
         </Routes>
