@@ -9,6 +9,9 @@ jobs:
     name: Deploy QA Environment
     runs-on: ubuntu-latest
     environment: qa
+    permissions:
+      contents: read
+      packages: write
 
     steps:
       - uses: actions/checkout@v4
