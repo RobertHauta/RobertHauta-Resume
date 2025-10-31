@@ -13,8 +13,20 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
       padding="lg"
       radius="md"
       withBorder
-      style={{ cursor: 'pointer', height: '100%' }}
+      style={{
+        cursor: 'pointer',
+        height: '100%',
+        transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out'
+      }}
       onClick={onClick}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = 'scale(1.05)';
+        e.currentTarget.style.boxShadow = '0 8px 16px rgba(0, 0, 0, 0.3)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = 'scale(1)';
+        e.currentTarget.style.boxShadow = '';
+      }}
     >
       <Card.Section>
         {project.images[0] ? (
@@ -35,6 +47,12 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
         <Text fw={700} size="xl">
           {project.title}
         </Text>
+
+        {project.date_range && (
+          <Text size="xs" c="dimmed" fw={500}>
+            {project.date_range}
+          </Text>
+        )}
 
         <Text size="sm" c="dimmed" lineClamp={3}>
           {project.brief_description}

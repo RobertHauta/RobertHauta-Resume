@@ -41,42 +41,47 @@ export function Landing() {
 
   return (
     <>
-      <Container size="xl" py="xl">
-        <Stack gap="xl" mb="xl">
-          <div>
-            <Title order={1} size="3rem" ta="center" c="white">
-              Robert Hauta
-            </Title>
-            <Text size="xl" ta="center" c="dimmed" mt="md">
-              Full Stack Developer & Software Engineer
-            </Text>
-          </div>
+      <div style={{
+        background: 'linear-gradient(to bottom, #1A1B1E 0%, #1A1B1E 40%, #4b0012 100%)',
+        minHeight: '100vh'
+      }}>
+        <Container size="xl" py="xl">
+          <Stack gap="xl" mb="xl">
+            <div>
+              <Title order={1} size="3rem" ta="center" c="white">
+                Robert Hauta
+              </Title>
+              <Text size="xl" ta="center" c="dimmed" mt="md">
+                Full Stack Developer & Software Engineer
+              </Text>
+            </div>
 
-          <Text size="lg" ta="center" c="white" maw={800} mx="auto">
-            Welcome to my portfolio. Here you'll find a collection of projects I've worked on,
-            showcasing my expertise in full-stack development, cloud architecture, and modern web technologies.
-          </Text>
-        </Stack>
-
-        {projects.length === 0 ? (
-          <Center py="xl">
-            <Text size="lg" c="dimmed">
-              No projects yet. Check back soon!
+            <Text size="lg" ta="center" c="white" maw={800} mx="auto">
+              Welcome to my portfolio. Here you'll find a collection of projects I've worked on,
+              showcasing my expertise in full-stack development, cloud architecture, and modern web technologies.
             </Text>
-          </Center>
-        ) : (
-          <Grid gutter="lg">
-            {projects.map((project) => (
-              <Grid.Col key={project.id} span={{ base: 12, sm: 6, md: 4 }}>
-                <ProjectCard
-                  project={project}
-                  onClick={() => handleProjectClick(project)}
-                />
-              </Grid.Col>
-            ))}
-          </Grid>
-        )}
-      </Container>
+          </Stack>
+
+          {projects.length === 0 ? (
+            <Center py="xl">
+              <Text size="lg" c="dimmed">
+                No projects yet. Check back soon!
+              </Text>
+            </Center>
+          ) : (
+            <Grid gutter="lg">
+              {projects.map((project) => (
+                <Grid.Col key={project.id} span={{ base: 12, sm: 6, md: 4 }}>
+                  <ProjectCard
+                    project={project}
+                    onClick={() => handleProjectClick(project)}
+                  />
+                </Grid.Col>
+              ))}
+            </Grid>
+          )}
+        </Container>
+      </div>
 
       <ProjectModal
         project={selectedProject}

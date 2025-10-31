@@ -9,6 +9,5 @@ export interface Project {
   learned?: string;
   github_url?: string;
   live_url?: string;
-  created_at: string;
-  order: number;
+  date_range?: string;
 }

@@ -24,11 +24,44 @@
       "https://placehold.co/800x400/1A1B1E/f21616?text=Portfolio+Screenshot+2"
     ],
     "learned": "Built experience with React patterns including hooks and context API, TypeScript for type safety, and deploying static sites with GitHub Pages. Learned to create user experiences with Mantine UI components and implement responsive designs.",
+    "date_range": "October 2025 - Current",
     "github_url": "https://github.com/RobertHauta/RobertHauta-Resume",
     "live_url": "https://roberthauta.github.io/RobertHauta-Resume/"
   },
   {
     "id": "2",
+    "title": "Fedora Learning Platform",
+    "brief_description": "A web-based learning platform for teachers and students. Features test creation, assignments, and in-class questions with mobile-friendly design. Deployed on AWS EC2.",
+    "full_description": "Built a learning management platform as an in-class project to connect teachers and students. The application allows teachers to create and manage tests, assignments, and post questions for students to answer. Features a mobile-friendly interface built with React and React Router on the frontend, with Node.js and Express.js handling the backend API. Uses PostgreSQL database hosted on Neon for data persistence. Both frontend and backend are containerized using Docker and deployed to AWS EC2 virtual machines.",
+    "technologies": [
+      "React",
+      "Node.js",
+      "Express.js",
+      "PostgreSQL",
+      "Neon",
+      "Docker",
+      "AWS EC2"
+    ],
+    "technology_icons": [
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg",
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg"
+    ],
+    "images": [
+      "projects/fedora_learning/screenshot-1.png",
+      "projects/fedora_learning/screenshot-2.png",
+      "projects/fedora_learning/screenshot-3.png",
+      "projects/fedora_learning/screenshot-4.png",
+      "projects/fedora_learning/screenshot-5.png"
+    ],
+    "learned": "Gained experience building full-stack web applications with Node.js and React. Learned to design RESTful APIs with Express.js, work with PostgreSQL databases, and implement responsive mobile-first interfaces. Developed skills in containerization with Docker, deploying applications to AWS EC2 instances, and working with cloud database services like Neon.",
+    "date_range": "January 2025 - April 2025"
+  },
+  {
+    "id": "3",
     "title": "Enterprise Quoting & Estimating Tool",
     "brief_description": "A Power Platform solution integrated with Dynamics 365 for quoting and estimating workflows. Features OAuth authentication, PDF generation, and financial calculations.",
     "full_description": "Led the development and integration of a quoting and estimating application for an enterprise client, integrating with their Microsoft Dynamics 365 and Power Platform environment. The solution includes a frontend application with Microsoft OAuth authentication, relational database design in Dataverse, and C# plugins for Dynamics 365. Implemented monetary calculations for multi-currency support, PDF generation for quotes and estimates, and built UI components with JavaScript, HTML, and CSS. Deployed using Azure DevOps pipelines with CI/CD workflows.",
@@ -61,6 +94,7 @@
       "projects/quoting_tool/screenshot-5.png",
       "projects/quoting_tool/screenshot-6.png"
     ],
-    "learned": "Built expertise in Microsoft technologies and Power Platform development. Gained experience with Dynamics 365 customization through C# plugins, Dataverse relational database design, and Power FX for business logic implementation. Developed skills in financial calculations handling multiple currencies, OAuth implementation for enterprise SSO, and building CI/CD pipelines with Azure DevOps. Learned integration patterns, security best practices, and maintaining backward compatibility."
+    "learned": "Built expertise in Microsoft technologies and Power Platform development. Gained experience with Dynamics 365 customization through C# plugins, Dataverse relational database design, and Power FX for business logic implementation. Developed skills in financial calculations handling multiple currencies, OAuth implementation for enterprise SSO, and building CI/CD pipelines with Azure DevOps. Learned integration patterns, security best practices, and maintaining backward compatibility.",
+    "date_range": "November 2024 - August 2025"
   }
 ]

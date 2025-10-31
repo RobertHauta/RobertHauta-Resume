@@ -16,7 +16,14 @@ export function ProjectModal({ project, opened, onClose }: ProjectModalProps) {
     <Modal
       opened={opened}
       onClose={onClose}
-      title={<Text size="xl" fw={700}>{project.title}</Text>}
+      title={
+        <Stack gap={4}>
+          <Text size="xl" fw={700}>{project.title}</Text>
+          {project.date_range && (
+            <Text size="sm" c="dimmed" fw={500}>{project.date_range}</Text>
+          )}
+        </Stack>
+      }
       size="xl"
       padding="lg"
       centered
