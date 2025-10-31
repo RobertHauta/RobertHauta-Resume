@@ -32,6 +32,7 @@ yarn-error.log*
 dist/
 dist-ssr/
 *.local
+.vite/
 
 # Environment variables
 .env
