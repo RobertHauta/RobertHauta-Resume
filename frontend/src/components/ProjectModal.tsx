@@ -38,7 +38,7 @@ export function ProjectModal({ project, opened, onClose }: ProjectModalProps) {
             {project.images.map((image, index) => (
               <Carousel.Slide key={index}>
                 <Image
-                  src={image}
+                  src={image.startsWith('http') ? image : `${import.meta.env.BASE_URL}${image}`}
                   height={400}
                   alt={`${project.title} screenshot ${index + 1}`}
                   fit="contain"

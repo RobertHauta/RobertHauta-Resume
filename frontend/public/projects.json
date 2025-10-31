@@ -54,12 +54,12 @@
       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg"
     ],
     "images": [
-      "/projects/quoting_tool/screenshot-1.png",
-      "/projects/quoting_tool/screenshot-2.png",
-      "/projects/quoting_tool/screenshot-3.png",
-      "/projects/quoting_tool/screenshot-4.png",
-      "/projects/quoting_tool/screenshot-5.png",
-      "/projects/quoting_tool/screenshot-6.png"
+      "projects/quoting_tool/screenshot-1.png",
+      "projects/quoting_tool/screenshot-2.png",
+      "projects/quoting_tool/screenshot-3.png",
+      "projects/quoting_tool/screenshot-4.png",
+      "projects/quoting_tool/screenshot-5.png",
+      "projects/quoting_tool/screenshot-6.png"
     ],
     "learned": "Built expertise in Microsoft technologies and Power Platform development. Gained experience with Dynamics 365 customization through C# plugins, Dataverse relational database design, and Power FX for business logic implementation. Developed skills in financial calculations handling multiple currencies, OAuth implementation for enterprise SSO, and building CI/CD pipelines with Azure DevOps. Learned integration patterns, security best practices, and maintaining backward compatibility."
   }
