@@ -1,132 +1,117 @@
 # Quick Start Guide
 
-Get the resume website running locally in 5 minutes!
+Get the resume website running locally in 2 minutes!
 
-## Option 1: Docker Compose (Recommended)
+## Prerequisites
 
-The fastest way to get started:
+Make sure you have installed:
+- **Node.js** 20 or higher
+- **Yarn** package manager
+
+## Getting Started
 
 ```bash
 # 1. Clone the repository
 git clone https://github.com/yourusername/RobertHauta-Resume.git
 cd RobertHauta-Resume
 
-# 2. Start all services
-cd docker
-docker compose -f docker-compose.dev.yml up
-```
-
-That's it! The application will be available at:
-- Frontend: http://localhost:6969
-- Backend API: http://localhost:8000
-- API Documentation: http://localhost:8000/docs
-
-## Option 2: Local Development (No Docker)
-
-If you prefer to run services individually:
-
-### 1. Start MongoDB
-```bash
-docker run -d -p 27017:27017 --name resume-mongo mongo:7.0
-```
-
-### 2. Start Backend
-```bash
-cd backend
-
-# Create environment file
-cp .env.example .env
-
-# Generate a secret key and update .env
-echo "SECRET_KEY=$(openssl rand -hex 32)" >> .env
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Run the server
-uvicorn app.main:app --reload --port 8000
-```
-
-Backend will be at http://localhost:8000
-
-### 3. Start Frontend
-```bash
-# In a new terminal
+# 2. Navigate to frontend and install dependencies
 cd frontend
-
-# Create environment file
-cp .env.example .env
-
-# Install dependencies
 yarn install
 
-# Run the dev server
+# 3. Start the development server
 yarn dev
 ```
 
-Frontend will be at http://localhost:6969
+That's it! The application will be available at **http://localhost:5173**
 
-## First Steps
+## What You'll See
 
-1. **Open the application** at http://localhost:6969
+- A modern, responsive resume website
+- Built with React, TypeScript, and Mantine UI
+- Hot module replacement for instant updates as you code
 
-2. **Register a new account**
-   - Click "Create account"
-   - Fill in your details
-   - You'll be automatically logged in
+## Available Commands
 
-3. **Explore the API**
-   - Visit http://localhost:8000/docs
-   - Interactive API documentation powered by FastAPI
-
-## Stopping Services
-
-### Docker Compose
 ```bash
-cd docker
-docker compose -f docker-compose.dev.yml down
+yarn dev          # Start development server
+yarn build        # Build for production
+yarn preview      # Preview production build
+yarn lint         # Run linter
 ```
 
-### Local Development
-Press `Ctrl+C` in each terminal, then:
-```bash
-docker stop resume-mongo
-docker rm resume-mongo
+## Making Changes
+
+1. Open the project in your favorite editor (VS Code recommended)
+2. Edit files in `frontend/src/`
+3. Save and see changes instantly in your browser
+4. The site uses hot module replacement for fast development
+
+## Project Structure
+
+```
+frontend/
+├── src/
+│   ├── components/     # Reusable React components
+│   ├── contexts/       # React context providers
+│   ├── pages/          # Page components
+│   ├── types/          # TypeScript type definitions
+│   └── App.tsx         # Main application component
+├── public/             # Static assets
+└── index.html          # HTML entry point
 ```
 
-## Next Steps
+## Building for Production
 
-- Read the full [README.md](README.md) for detailed information
-- Check [GITHUB_SETUP.md](GITHUB_SETUP.md) for deployment setup
-- Start building your resume features!
+```bash
+cd frontend
+yarn build
+```
 
-## Common Issues
+The optimized production build will be in `frontend/dist/`
+
+## Preview Production Build Locally
+
+```bash
+cd frontend
+yarn preview
+```
+
+This serves the production build locally so you can test it before deploying.
+
+## Deploying
+
+The site automatically deploys to GitHub Pages when you push to the `main` branch. See the main [README.md](README.md) for more details.
+
+## Troubleshooting
 
 ### Port already in use
-If you get a port conflict error:
-```bash
-# Check what's using the port
-lsof -i :6969  # or :8000
-# Kill the process or change the port in vite.config.ts
-```
 
-### MongoDB connection failed
-Make sure MongoDB is running:
-```bash
-docker ps | grep mongo
-```
+If port 5173 is already in use, Vite will automatically try the next available port (5174, 5175, etc.)
 
-### Module not found (Python)
-Make sure you're in the backend directory and have activated your virtual environment:
-```bash
-cd backend
-pip install -r requirements.txt
-```
+### Module not found
 
-### Dependencies issue (Frontend)
-Clear the node_modules and reinstall:
+Clear node_modules and reinstall:
 ```bash
 cd frontend
 rm -rf node_modules
 yarn install
 ```
+
+### Build errors
+
+Make sure you're using Node.js 20 or higher:
+```bash
+node --version
+```
+
+## Next Steps
+
+- Read the full [README.md](README.md) for more information
+- Customize the content in `frontend/src/pages/`
+- Add your own projects and experience
+- Push to GitHub to see it live on GitHub Pages!
+
+## Need Help?
+
+Check out the main [README.md](README.md) file or the [Vite documentation](https://vitejs.dev/) for more information.

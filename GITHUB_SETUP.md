@@ -1,134 +1,168 @@
-# GitHub Secrets and Variables Setup
+# GitHub Pages Setup Guide
 
-This document outlines all the GitHub secrets and variables you need to configure for the CI/CD pipeline.
+This guide will help you set up GitHub Pages deployment for your resume website.
 
-## Required GitHub Environments
+## Prerequisites
 
-Create the following environments in your GitHub repository:
-- **qa** - For QA deployments
-- **production** - For production deployments
+- A GitHub account
+- Your repository pushed to GitHub
+- GitHub Pages enabled on your repository
 
-Go to: `Settings` > `Environments` > `New environment`
+## Step 1: Enable GitHub Pages
 
-## Repository Variables
+1. Go to your repository on GitHub
+2. Click **Settings** → **Pages** (in the left sidebar)
+3. Under **Source**, select **GitHub Actions**
 
-These are public configuration values that don't need to be secret.
+That's it for basic setup! The repository already has a workflow file at `.github/workflows/deploy-pages.yml` that will automatically deploy your site.
 
-Go to: `Settings` > `Secrets and variables` > `Actions` > `Variables` tab
+## Step 2: Configure Repository Permissions
 
-### Global Variables (used by all environments)
+Your repository needs proper permissions for GitHub Actions to deploy to Pages:
 
-| Variable Name | Example Value | Description |
-|--------------|---------------|-------------|
-| `ALGORITHM` | `HS256` | JWT algorithm |
-| `ACCESS_TOKEN_EXPIRE_MINUTES` | `30` | Token expiration time |
-| `API_V1_PREFIX` | `/api/v1` | API path prefix |
+1. Go to **Settings** → **Actions** → **General**
+2. Scroll down to **Workflow permissions**
+3. Select **Read and write permissions**
+4. Check **Allow GitHub Actions to create and approve pull requests**
+5. Click **Save**
 
-### QA Environment Variables
+## Step 3: Verify the Workflow
 
-Set these in the **qa** environment:
+1. Go to the **Actions** tab in your repository
+2. You should see the "Deploy to GitHub Pages" workflow
+3. If you've already pushed to `main`, it should have triggered automatically
 
-| Variable Name | Example Value | Description |
-|--------------|---------------|-------------|
-| `QA_MONGODB_DB_NAME` | `resume_db_qa` | MongoDB database name for QA |
-| `QA_PROJECT_NAME` | `Resume API - QA` | Project name for QA |
-| `QA_CORS_ORIGINS` | `["https://qa.roberthauta.com","http://qa.roberthauta.com"]` | CORS origins for QA |
+## How It Works
 
-### Production Environment Variables
+The GitHub Actions workflow (`.github/workflows/deploy-pages.yml`) does the following:
 
-Set these in the **production** environment:
+1. **Triggers** on every push to the `main` branch
+2. **Installs** Node.js and project dependencies
+3. **Builds** the React application with Vite
+4. **Deploys** the built files to GitHub Pages
 
-| Variable Name | Example Value | Description |
-|--------------|---------------|-------------|
-| `PROD_MONGODB_DB_NAME` | `resume_db_prod` | MongoDB database name for production |
-| `PROD_PROJECT_NAME` | `Resume API` | Project name for production |
-| `PROD_CORS_ORIGINS` | `["https://roberthauta.com","https://www.roberthauta.com","http://roberthauta.com","http://www.roberthauta.com"]` | CORS origins for production |
+## Manual Deployment
 
-## Repository Secrets
+To manually trigger a deployment:
 
-These are sensitive values that should be kept secret.
+1. Go to **Actions** tab
+2. Select **Deploy to GitHub Pages** workflow
+3. Click **Run workflow**
+4. Select the `main` branch
+5. Click **Run workflow**
 
-Go to: `Settings` > `Secrets and variables` > `Actions` > `Secrets` tab
+## Your Site URL
 
-### QA Environment Secrets
-
-Set these in the **qa** environment:
-
-| Secret Name | Description | How to Generate |
-|-------------|-------------|-----------------|
-| `QA_MONGODB_URL` | MongoDB connection string | `mongodb://mongodb:27017` (or your hosted MongoDB URL) |
-| `QA_SECRET_KEY` | JWT secret key | Run: `openssl rand -hex 32` |
-| `QA_HOST` | QA server hostname/IP | Your QA server address |
-| `QA_USERNAME` | SSH username for QA server | Server SSH username |
-| `QA_SSH_KEY` | SSH private key for QA server | Generate with: `ssh-keygen -t ed25519 -C "github-actions-qa"` |
-
-### Production Environment Secrets
-
-Set these in the **production** environment:
-
-| Secret Name | Description | How to Generate |
-|-------------|-------------|-----------------|
-| `PROD_MONGODB_URL` | MongoDB connection string | `mongodb://mongodb:27017` (or your hosted MongoDB URL) |
-| `PROD_SECRET_KEY` | JWT secret key | Run: `openssl rand -hex 32` |
-| `PROD_HOST` | Production server hostname/IP | Your production server address |
-| `PROD_USERNAME` | SSH username for production server | Server SSH username |
-| `PROD_SSH_KEY` | SSH private key for production server | Generate with: `ssh-keygen -t ed25519 -C "github-actions-prod"` |
-
-## Setting up SSH Keys
-
-1. Generate SSH key pair:
-   ```bash
-   ssh-keygen -t ed25519 -C "github-actions-qa" -f ~/.ssh/github-actions-qa
-   ssh-keygen -t ed25519 -C "github-actions-prod" -f ~/.ssh/github-actions-prod
-   ```
-
-2. Copy the public key to your servers:
-   ```bash
-   ssh-copy-id -i ~/.ssh/github-actions-qa.pub user@qa-server
-   ssh-copy-id -i ~/.ssh/github-actions-prod.pub user@prod-server
-   ```
-
-3. Add the private key contents to GitHub Secrets:
-   ```bash
-   cat ~/.ssh/github-actions-qa  # Copy this to QA_SSH_KEY
-   cat ~/.ssh/github-actions-prod  # Copy this to PROD_SSH_KEY
-   ```
-
-## Server Setup Requirements
-
-On your QA and Production servers, you need:
-
-1. Docker and Docker Compose installed
-2. The repository cloned at `/opt/resume-app`
-3. SSH access configured for the GitHub Actions user
-4. The GitHub Actions user has permission to run Docker commands
-
-### Server Directory Structure
+After successful deployment, your site will be available at:
 
 ```
-/opt/resume-app/
-├── docker/
-│   ├── docker-compose.qa.yml (or docker-compose.prod.yml)
-│   ├── nginx.conf
-│   ├── frontend-nginx.conf
-│   └── ssl/ (for SSL certificates)
+https://<your-username>.github.io/RobertHauta-Resume/
 ```
 
-## Testing the Setup
+For example: `https://roberthauta.github.io/RobertHauta-Resume/`
 
-1. Push to the `qa` branch to trigger QA deployment
-2. Push to the `main` branch to trigger production deployment
-3. Monitor the Actions tab in GitHub to see deployment progress
+## Custom Domain (Optional)
 
-## Environment URLs
+To use a custom domain like `www.yourdomain.com`:
 
-- **Development**: http://localhost:6969 (local only)
-- **QA**: https://qa.roberthauta.com
-- **Production**: https://roberthauta.com
+1. **Configure DNS** with your domain provider:
+   - Add a CNAME record pointing to `<your-username>.github.io`
+   - Or add A records pointing to GitHub's IP addresses
 
-## Notes
+2. **Add custom domain in GitHub**:
+   - Go to **Settings** → **Pages**
+   - Enter your custom domain under **Custom domain**
+   - Click **Save**
 
-- The `GITHUB_TOKEN` is automatically provided by GitHub Actions
-- Make sure to enable Container Registry write permissions in your repository settings
-- Consider setting up protected branches for `main` and `qa`
-- Enable required status checks before merging PRs to these branches
+3. **Update base URL** in `frontend/vite.config.ts`:
+   ```typescript
+   export default defineConfig({
+     base: '/', // Change from '/RobertHauta-Resume/'
+     // ... rest of config
+   })
+   ```
+
+4. **Create CNAME file** in `frontend/public/`:
+   ```
+   www.yourdomain.com
+   ```
+
+5. **Enable HTTPS** (recommended):
+   - Check **Enforce HTTPS** in Settings → Pages
+
+## Troubleshooting
+
+### Workflow fails with permission errors
+
+Make sure you've enabled the correct workflow permissions (see Step 2 above).
+
+### 404 errors on page refresh
+
+This is common with client-side routing. GitHub Pages needs a custom 404.html:
+
+1. Create `frontend/public/404.html` with the same content as `index.html`
+2. The application's router will handle the correct route
+
+### Assets not loading
+
+Check that the `base` URL in `vite.config.ts` matches your repository name:
+```typescript
+base: '/RobertHauta-Resume/', // Must match your repo name
+```
+
+### Build fails
+
+Check the Actions logs for specific errors. Common issues:
+- TypeScript errors (run `yarn tsc --noEmit` locally to check)
+- Missing dependencies (ensure all are in `package.json`)
+- Linting errors (run `yarn lint` locally)
+
+## Monitoring Deployments
+
+1. Go to **Actions** tab to see deployment history
+2. Click on a workflow run to see detailed logs
+3. Green checkmark = successful deployment
+4. Red X = failed deployment (click to see error logs)
+
+## Development Workflow
+
+1. **Develop locally**:
+   ```bash
+   cd frontend
+   yarn dev
+   ```
+
+2. **Test build locally**:
+   ```bash
+   yarn build
+   yarn preview
+   ```
+
+3. **Commit and push**:
+   ```bash
+   git add .
+   git commit -m "Your changes"
+   git push origin main
+   ```
+
+4. **Automatic deployment**: GitHub Actions will automatically build and deploy
+
+## Protecting the Main Branch (Recommended)
+
+To prevent accidental pushes to main:
+
+1. Go to **Settings** → **Branches**
+2. Click **Add branch protection rule**
+3. Enter `main` as the branch name pattern
+4. Enable:
+   - **Require a pull request before merging**
+   - **Require status checks to pass before merging**
+5. Click **Create**
+
+Now you'll need to create PRs for changes, ensuring review before deployment.
+
+## Resources
+
+- [GitHub Pages Documentation](https://docs.github.com/en/pages)
+- [GitHub Actions Documentation](https://docs.github.com/en/actions)
+- [Vite Deployment Guide](https://vitejs.dev/guide/static-deploy.html)

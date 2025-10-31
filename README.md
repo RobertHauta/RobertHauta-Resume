@@ -1,80 +1,48 @@
 # Robert Hauta - Resume Website
 
-A full-stack resume website built with React, TypeScript, FastAPI, and MongoDB, featuring authentication and multi-environment deployment.
+A modern, static resume website built with React and TypeScript, deployed on GitHub Pages.
 
 ## Tech Stack
 
-### Frontend
 - **React 19** with **TypeScript**
 - **Vite** for build tooling
 - **Mantine UI** component library
 - **React Router** for routing
-- **Axios** for API calls
-
-### Backend
-- **FastAPI** (Python)
-- **MongoDB** with Motor (async driver)
-- **JWT** authentication
-- **Pydantic** for data validation
-
-### Infrastructure
-- **Docker** & **Docker Compose**
-- **Nginx** as reverse proxy
+- **GitHub Pages** for hosting
 - **GitHub Actions** for CI/CD
-- **GitHub Container Registry** for Docker images
 
 ## Project Structure
 
 ```
 RobertHauta-Resume/
-├── backend/                 # FastAPI backend
-│   ├── app/
-│   │   ├── api/            # API endpoints
-│   │   ├── core/           # Core configurations
-│   │   ├── models/         # Database models
-│   │   ├── schemas/        # Pydantic schemas
-│   │   └── main.py         # Application entry point
-│   └── requirements.txt
-├── frontend/               # React frontend
+├── frontend/               # React frontend application
 │   ├── src/
 │   │   ├── components/     # React components
-│   │   ├── contexts/       # React contexts (auth, etc.)
+│   │   ├── contexts/       # React contexts
 │   │   ├── pages/          # Page components
-│   │   ├── services/       # API client services
 │   │   ├── types/          # TypeScript types
 │   │   └── App.tsx         # Main app component
+│   ├── public/             # Static assets
 │   ├── package.json
 │   └── vite.config.ts
-├── docker/                 # Docker configuration
-│   ├── docker-compose.dev.yml
-│   ├── docker-compose.qa.yml
-│   ├── docker-compose.prod.yml
-│   ├── Dockerfile.backend
-│   ├── Dockerfile.frontend
-│   └── nginx.conf
 ├── .github/
 │   └── workflows/          # GitHub Actions workflows
 └── README.md
 ```
 
-## Environments
+## Live Site
 
-| Environment | URL | Branch | Auto-Deploy |
-|------------|-----|--------|------------|
-| **Development** | http://localhost:6969 | - | No |
-| **QA** | https://qa.roberthauta.com | `qa` | Yes |
-| **Production** | https://roberthauta.com | `main` | Yes |
+Visit the live site at: [https://roberthauta.github.io/RobertHauta-Resume/](https://roberthauta.github.io/RobertHauta-Resume/)
 
 ## Getting Started
 
 ### Prerequisites
 
-- **Node.js** 20+ and **Yarn**
-- **Python** 3.11+
-- **Docker** and **Docker Compose**
+- **Node.js** 20+
+- **Yarn** package manager
 - **Git**
 
-### Development Setup
+### Local Development
 
 1. **Clone the repository**
    ```bash
@@ -82,93 +50,58 @@ RobertHauta-Resume/
    cd RobertHauta-Resume
    ```
 
-2. **Set up backend environment**
-   ```bash
-   cd backend
-   cp .env.example .env
-   # Edit .env and set your SECRET_KEY
-   pip install -r requirements.txt
-   ```
-
-3. **Set up frontend**
+2. **Install dependencies**
    ```bash
    cd frontend
-   cp .env.example .env
    yarn install
    ```
 
-4. **Run with Docker Compose (Recommended)**
+3. **Run the development server**
    ```bash
-   cd docker
-   docker compose -f docker-compose.dev.yml up
-   ```
-
-   Access the application:
-   - Frontend: http://localhost:6969
-   - Backend API: http://localhost:8000
-   - API Docs: http://localhost:8000/docs
-
-5. **Or run separately (without Docker)**
-
-   Terminal 1 - Backend:
-   ```bash
-   cd backend
-   uvicorn app.main:app --reload --port 8000
-   ```
-
-   Terminal 2 - Frontend:
-   ```bash
-   cd frontend
    yarn dev
    ```
 
-   Terminal 3 - MongoDB:
-   ```bash
-   docker run -d -p 27017:27017 mongo:7.0
-   ```
+4. **Open your browser**
+   Navigate to http://localhost:5173
 
-## API Endpoints
+## Available Scripts
 
-### Authentication
-- `POST /api/v1/auth/register` - Register new user
-- `POST /api/v1/auth/login` - Login and get token
-- `GET /api/v1/auth/me` - Get current user (protected)
-
-### Health
-- `GET /health` - Health check endpoint
+### Development
+```bash
+cd frontend
+yarn dev          # Start development server
+yarn build        # Build for production
+yarn preview      # Preview production build locally
+yarn lint         # Run ESLint
+```
 
 ## Deployment
 
-### GitHub Setup
+The site automatically deploys to GitHub Pages when you push to the `main` branch.
 
-1. Configure GitHub secrets and variables (see [GITHUB_SETUP.md](GITHUB_SETUP.md))
-2. Set up server infrastructure
-3. Push to `qa` or `main` branch to trigger deployment
+### GitHub Actions Workflow
+
+The `.github/workflows/deploy-pages.yml` workflow:
+1. Checks out the code
+2. Installs dependencies
+3. Builds the frontend
+4. Deploys to GitHub Pages
 
 ### Manual Deployment
 
-**QA:**
-```bash
-cd docker
-docker compose -f docker-compose.qa.yml up -d
-```
+To manually trigger a deployment:
+1. Go to the "Actions" tab in GitHub
+2. Select "Deploy to GitHub Pages"
+3. Click "Run workflow"
 
-**Production:**
-```bash
-cd docker
-docker compose -f docker-compose.prod.yml up -d
-```
+## Project Features
 
-## Nginx Routing
-
-The nginx proxy routes requests based on the domain:
-
-- `dev.roberthauta.com/app` → Frontend
-- `dev.roberthauta.com/api` → Backend API
-- `qa.roberthauta.com/app` → Frontend
-- `qa.roberthauta.com/api` → Backend API
-- `roberthauta.com/app` → Frontend
-- `roberthauta.com/api` → Backend API
+- Modern, responsive design
+- Fast loading with Vite
+- Type-safe with TypeScript
+- Component library with Mantine UI
+- Client-side routing with React Router
+- Automated deployments with GitHub Actions
 
 ## Development Workflow
 
@@ -179,49 +112,23 @@ The nginx proxy routes requests based on the domain:
 
 2. **Make changes and test locally**
    ```bash
-   cd docker
-   docker compose -f docker-compose.dev.yml up
+   cd frontend
+   yarn dev
    ```
 
-3. **Push and create PR**
+3. **Build and preview**
+   ```bash
+   yarn build
+   yarn preview
+   ```
+
+4. **Push and create PR**
    ```bash
    git push origin feature/my-feature
    ```
 
-4. **Merge to `qa` for testing**
-   - Automatically deploys to qa.roberthauta.com
-
-5. **Merge to `main` for production**
-   - Automatically deploys to roberthauta.com
-
-## Scripts
-
-### Backend
-```bash
-# Run development server
-uvicorn app.main:app --reload
-
-# Format code
-black app/
-
-# Lint code
-ruff check app/
-```
-
-### Frontend
-```bash
-# Run development server
-yarn dev
-
-# Build for production
-yarn build
-
-# Lint
-yarn lint
-
-# Type check
-yarn tsc --noEmit
-```
+5. **Merge to `main`**
+   - Automatically deploys to GitHub Pages
 
 ## Contributing
 
